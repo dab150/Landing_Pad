@@ -30,7 +30,7 @@ static inject_private_t this;
 
 /**
  * Sample pressure packet used for testing. We should take this array as
- * base and edit pnly the required fields
+ * base and edit only the required fields
  */
 static const uint8_t __PRESSURE_SAMPLE[PARAM_UPDATE_FULL_LEN] =
     {0xfe, 0x17, 0xfd, 0xff, 0xbe, 0x17, 0x00, 0x50, 0xc3, 0x47, 0x01, 0x01,
@@ -111,7 +111,7 @@ void InjectInit()
     inject.timer = INJECT_PERIOD;
     CircularBufferInit(&(inject.outBuff), this.bufArray, RADIO_OUTPUT_BUFFER);
 
-    //Init Presure ijection buffer
+    //Init Presure injection buffer
     memcpy(this.press.buf, __PRESSURE_SAMPLE, PARAM_UPDATE_FULL_LEN);
     this.press.count = 0;
     this.press.sys_id = PRESS_SYSTEM_ID;
@@ -119,7 +119,7 @@ void InjectInit()
 }
 
 /**
- * Analice a stream byte by byte to detect packets and try to inject custom 
+ * Analyze a stream byte by byte to detect packets and try to inject custom 
  * packets into the stream
  * @param rx - next byte of the stream
  */
@@ -137,7 +137,7 @@ void InjectLoop(uint8_t rx)
     else
         return;
 
-    //Analyze recieved byte
+    //Analyze received byte
     switch (this.state)
     {
         case INJECT_STATE_MSG_END:
@@ -186,7 +186,7 @@ void InjectTryInject()
     if(inject.timer)
         return;
 
-    //Is there enounhg space to inject?
+    //Is there enough space to inject?
     if(CircularBufferFreeSpace(&(inject.outBuff)) > (2*PARAM_UPDATE_FULL_LEN))
     {
         uint8_t i;

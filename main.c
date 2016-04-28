@@ -7,7 +7,6 @@
 
 /*
  * UART1 - FTDI USB
- * UART2 - Bluetooth
  * UART3 - Radio
  * 
  */    
@@ -19,9 +18,7 @@
 #include "barometer.h"
 #include "timers.h"
 #include "debug.h"
-#include "compass.h"
 #include "power.h"
-#include "gps.h"
 #include "relay.h"
 #include "inject.h"
 #include "./utests/unit.h"
@@ -34,7 +31,7 @@ int main(void)
     SYSTEM_Initialize();
 
     //Components Init
-    RelayInit();
+    RelayInit(); //initialize the state of the relay machine to 0
     InjectInit();
 
     //Init timer
