@@ -28,31 +28,17 @@
 
 uint16_t AppTimer, GPSpowerTimer;
 
-
 int main(void)
 {
-
     //System Init
     SYSTEM_Initialize();
-    run_all_tests();
-
 
     //Components Init
     RelayInit();
     InjectInit();
-    gps_Init();
-    Bar_Init();
-    
-    
-    //gps_PowerOn(2500);
-
-
-
 
     //Init timer
-    AppTimer = 0;
-
-    
+    AppTimer = 0; 
 
     while(1)
     {
@@ -60,31 +46,3 @@ int main(void)
         InjectTryInject();
     }
 }
-
-
-
-/**
-
- SYSTEM_Initialize();
-    RelayInit();
-    InjectInit();
-
-    //Bar_Init();
-
-    //POWER_GPS_COMPASS_TURN_ON();
-    //Compass_Init();
-    //gps_Init();
-
-
-    while(1)
-    {
-        //relayUARTs();
-        
-        __Bar_Test();
-        __Compass_Test();
-
-        //Delays 3 sec
-        for(i=0; i<(10 * 3); i++)
-            delay_ms(100);
-         * */
-

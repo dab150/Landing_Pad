@@ -237,8 +237,8 @@ void gps_Routine()
 }
 
 /**
- * Dterminates if data are updated and clear the update flag. User should
- * new data inmidiatly after calling this routine if new data are there
+ * Determines if data are updated and clear the update flag. User should
+ * new data immediately after calling this routine if new data are there
  * @return if true, there are new data to read.
  */
 bool gps_IsLocationUpdated()

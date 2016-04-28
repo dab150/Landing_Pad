@@ -26,9 +26,7 @@
       </logicalFolder>
       <itemPath>barometer.h</itemPath>
       <itemPath>debug.h</itemPath>
-      <itemPath>compass.h</itemPath>
       <itemPath>power.h</itemPath>
-      <itemPath>gps.h</itemPath>
       <itemPath>relay.h</itemPath>
       <itemPath>inject.h</itemPath>
       <itemPath>CircularBuffer.h</itemPath>
@@ -66,8 +64,6 @@
       <itemPath>main.c</itemPath>
       <itemPath>barometer.c</itemPath>
       <itemPath>debug.c</itemPath>
-      <itemPath>compass.c</itemPath>
-      <itemPath>gps.c</itemPath>
       <itemPath>traps.c</itemPath>
       <itemPath>relay.c</itemPath>
       <itemPath>inject.c</itemPath>

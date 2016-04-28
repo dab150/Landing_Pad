@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/uart3.c mcc_generated_files/uart2.c mcc_generated_files/uart1.c mcc_generated_files/adc1.c mcc_generated_files/pin_manager.c mcc_generated_files/interrupt_manager.c mcc_generated_files/mcc.c mcc_generated_files/spi1.c mcc_generated_files/tmr2.c mcc_generated_files/tmr1.c mcc_generated_files/i2c2.c mcc_generated_files/uart4.c utests/seatest.c utests/unit.c main.c barometer.c debug.c compass.c gps.c traps.c relay.c inject.c CircularBuffer.c timers.c
+SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/uart3.c mcc_generated_files/uart2.c mcc_generated_files/uart1.c mcc_generated_files/adc1.c mcc_generated_files/pin_manager.c mcc_generated_files/interrupt_manager.c mcc_generated_files/mcc.c mcc_generated_files/spi1.c mcc_generated_files/tmr2.c mcc_generated_files/tmr1.c mcc_generated_files/i2c2.c mcc_generated_files/uart4.c utests/seatest.c utests/unit.c main.c barometer.c debug.c traps.c relay.c inject.c CircularBuffer.c timers.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/uart3.o ${OBJECTDIR}/mcc_generated_files/uart2.o ${OBJECTDIR}/mcc_generated_files/uart1.o ${OBJECTDIR}/mcc_generated_files/adc1.o ${OBJECTDIR}/mcc_generated_files/pin_manager.o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/spi1.o ${OBJECTDIR}/mcc_generated_files/tmr2.o ${OBJECTDIR}/mcc_generated_files/tmr1.o ${OBJECTDIR}/mcc_generated_files/i2c2.o ${OBJECTDIR}/mcc_generated_files/uart4.o ${OBJECTDIR}/utests/seatest.o ${OBJECTDIR}/utests/unit.o ${OBJECTDIR}/main.o ${OBJECTDIR}/barometer.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/compass.o ${OBJECTDIR}/gps.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/relay.o ${OBJECTDIR}/inject.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/timers.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/uart3.o.d ${OBJECTDIR}/mcc_generated_files/uart2.o.d ${OBJECTDIR}/mcc_generated_files/uart1.o.d ${OBJECTDIR}/mcc_generated_files/adc1.o.d ${OBJECTDIR}/mcc_generated_files/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/mcc_generated_files/spi1.o.d ${OBJECTDIR}/mcc_generated_files/tmr2.o.d ${OBJECTDIR}/mcc_generated_files/tmr1.o.d ${OBJECTDIR}/mcc_generated_files/i2c2.o.d ${OBJECTDIR}/mcc_generated_files/uart4.o.d ${OBJECTDIR}/utests/seatest.o.d ${OBJECTDIR}/utests/unit.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/barometer.o.d ${OBJECTDIR}/debug.o.d ${OBJECTDIR}/compass.o.d ${OBJECTDIR}/gps.o.d ${OBJECTDIR}/traps.o.d ${OBJECTDIR}/relay.o.d ${OBJECTDIR}/inject.o.d ${OBJECTDIR}/CircularBuffer.o.d ${OBJECTDIR}/timers.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/uart3.o ${OBJECTDIR}/mcc_generated_files/uart2.o ${OBJECTDIR}/mcc_generated_files/uart1.o ${OBJECTDIR}/mcc_generated_files/adc1.o ${OBJECTDIR}/mcc_generated_files/pin_manager.o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/spi1.o ${OBJECTDIR}/mcc_generated_files/tmr2.o ${OBJECTDIR}/mcc_generated_files/tmr1.o ${OBJECTDIR}/mcc_generated_files/i2c2.o ${OBJECTDIR}/mcc_generated_files/uart4.o ${OBJECTDIR}/utests/seatest.o ${OBJECTDIR}/utests/unit.o ${OBJECTDIR}/main.o ${OBJECTDIR}/barometer.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/relay.o ${OBJECTDIR}/inject.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/timers.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/uart3.o.d ${OBJECTDIR}/mcc_generated_files/uart2.o.d ${OBJECTDIR}/mcc_generated_files/uart1.o.d ${OBJECTDIR}/mcc_generated_files/adc1.o.d ${OBJECTDIR}/mcc_generated_files/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/mcc_generated_files/spi1.o.d ${OBJECTDIR}/mcc_generated_files/tmr2.o.d ${OBJECTDIR}/mcc_generated_files/tmr1.o.d ${OBJECTDIR}/mcc_generated_files/i2c2.o.d ${OBJECTDIR}/mcc_generated_files/uart4.o.d ${OBJECTDIR}/utests/seatest.o.d ${OBJECTDIR}/utests/unit.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/barometer.o.d ${OBJECTDIR}/debug.o.d ${OBJECTDIR}/traps.o.d ${OBJECTDIR}/relay.o.d ${OBJECTDIR}/inject.o.d ${OBJECTDIR}/CircularBuffer.o.d ${OBJECTDIR}/timers.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/mcc_generated_files/uart3.o ${OBJECTDIR}/mcc_generated_files/uart2.o ${OBJECTDIR}/mcc_generated_files/uart1.o ${OBJECTDIR}/mcc_generated_files/adc1.o ${OBJECTDIR}/mcc_generated_files/pin_manager.o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/spi1.o ${OBJECTDIR}/mcc_generated_files/tmr2.o ${OBJECTDIR}/mcc_generated_files/tmr1.o ${OBJECTDIR}/mcc_generated_files/i2c2.o ${OBJECTDIR}/mcc_generated_files/uart4.o ${OBJECTDIR}/utests/seatest.o ${OBJECTDIR}/utests/unit.o ${OBJECTDIR}/main.o ${OBJECTDIR}/barometer.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/compass.o ${OBJECTDIR}/gps.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/relay.o ${OBJECTDIR}/inject.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/timers.o
+OBJECTFILES=${OBJECTDIR}/mcc_generated_files/uart3.o ${OBJECTDIR}/mcc_generated_files/uart2.o ${OBJECTDIR}/mcc_generated_files/uart1.o ${OBJECTDIR}/mcc_generated_files/adc1.o ${OBJECTDIR}/mcc_generated_files/pin_manager.o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/spi1.o ${OBJECTDIR}/mcc_generated_files/tmr2.o ${OBJECTDIR}/mcc_generated_files/tmr1.o ${OBJECTDIR}/mcc_generated_files/i2c2.o ${OBJECTDIR}/mcc_generated_files/uart4.o ${OBJECTDIR}/utests/seatest.o ${OBJECTDIR}/utests/unit.o ${OBJECTDIR}/main.o ${OBJECTDIR}/barometer.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/relay.o ${OBJECTDIR}/inject.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/timers.o
 
 # Source Files
-SOURCEFILES=mcc_generated_files/uart3.c mcc_generated_files/uart2.c mcc_generated_files/uart1.c mcc_generated_files/adc1.c mcc_generated_files/pin_manager.c mcc_generated_files/interrupt_manager.c mcc_generated_files/mcc.c mcc_generated_files/spi1.c mcc_generated_files/tmr2.c mcc_generated_files/tmr1.c mcc_generated_files/i2c2.c mcc_generated_files/uart4.c utests/seatest.c utests/unit.c main.c barometer.c debug.c compass.c gps.c traps.c relay.c inject.c CircularBuffer.c timers.c
+SOURCEFILES=mcc_generated_files/uart3.c mcc_generated_files/uart2.c mcc_generated_files/uart1.c mcc_generated_files/adc1.c mcc_generated_files/pin_manager.c mcc_generated_files/interrupt_manager.c mcc_generated_files/mcc.c mcc_generated_files/spi1.c mcc_generated_files/tmr2.c mcc_generated_files/tmr1.c mcc_generated_files/i2c2.c mcc_generated_files/uart4.c utests/seatest.c utests/unit.c main.c barometer.c debug.c traps.c relay.c inject.c CircularBuffer.c timers.c
 
 
 CFLAGS=
@@ -200,20 +200,6 @@ ${OBJECTDIR}/debug.o: debug.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/debug.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  debug.c  -o ${OBJECTDIR}/debug.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/debug.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -mno-eds-warn  -omf=elf -no-legacy-libc  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/debug.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/compass.o: compass.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/compass.o.d 
-	@${RM} ${OBJECTDIR}/compass.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  compass.c  -o ${OBJECTDIR}/compass.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/compass.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -mno-eds-warn  -omf=elf -no-legacy-libc  -O0 -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/compass.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/gps.o: gps.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/gps.o.d 
-	@${RM} ${OBJECTDIR}/gps.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  gps.c  -o ${OBJECTDIR}/gps.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/gps.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -mno-eds-warn  -omf=elf -no-legacy-libc  -O0 -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/gps.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/traps.o: traps.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -369,20 +355,6 @@ ${OBJECTDIR}/debug.o: debug.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/debug.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  debug.c  -o ${OBJECTDIR}/debug.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/debug.o.d"      -mno-eds-warn  -g -omf=elf -no-legacy-libc  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/debug.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/compass.o: compass.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/compass.o.d 
-	@${RM} ${OBJECTDIR}/compass.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  compass.c  -o ${OBJECTDIR}/compass.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/compass.o.d"      -mno-eds-warn  -g -omf=elf -no-legacy-libc  -O0 -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/compass.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/gps.o: gps.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/gps.o.d 
-	@${RM} ${OBJECTDIR}/gps.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  gps.c  -o ${OBJECTDIR}/gps.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/gps.o.d"      -mno-eds-warn  -g -omf=elf -no-legacy-libc  -O0 -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/gps.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/traps.o: traps.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
