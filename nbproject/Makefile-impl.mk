@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=BT Causeway.X
+PROJECTNAME=bt-causeway
 
 # Active Configuration
 DEFAULTCONF=default

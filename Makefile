@@ -59,7 +59,7 @@ build: .build-post
 
 .build-post: .build-impl
 # Add your post 'build' code here...
-	@call .\deploy\deploy.cmd
+#	@call .\deploy\deploy.cmd
 
 
 # clean

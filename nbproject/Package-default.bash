@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/BT_Causeway.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=BT_Causeway.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=btcauseway.x/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/bt-causeway.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=bt-causeway.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=bt-causeway/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/btcauseway.x/bin
+makeDirectory ${TMPDIR}/bt-causeway/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/btcauseway.x.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/bt-causeway.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/btcauseway.x.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/bt-causeway.tar *
 checkReturnCode
 
 # Cleanup
