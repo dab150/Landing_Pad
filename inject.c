@@ -176,7 +176,7 @@ void InjectTryInject()
     //Restart timer
     inject.timer = INJECT_PERIOD;
 
-    //Get data
+    //Set Data
     //This specific message does not have actual data in the payload. It is all zeros.
     uint8_t data = 0;
     //
@@ -185,15 +185,16 @@ void InjectTryInject()
     memcpy(this.packet.data, &data , sizeof(float));
     this.packet.count++;
 
-    //checksum
+    //calculate checksum
     cheksum = crc_calculate(this.packet.buf, WP_CLEAR_MSG_LEN+6);
     cheksum = crc_accumulate(
             MAVLINK_MESSAGE_CRCS[this.packet.msgType],
             cheksum);
 
+    //copy the proper checksum to the packet structure
     memcpy(this.packet.checksum, &cheksum, sizeof(cheksum));
 
-    //Inject
+    //Send the packet byte by byte
     for(i=0; i<WP_CLEAR_FULL_LEN; i++)
         CircularBufferEnque(&(inject.outBuff), this.packet.buf[i]);
 }

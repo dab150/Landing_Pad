@@ -60,7 +60,7 @@ void RelayLoop()
         default:
             //Error, unknown state
             RelayInit();
-            break;            
+            break; 
     }
 }
 
@@ -69,15 +69,20 @@ void RelayLoop()
  */
 void relayFromRadio()
 {
-    /* UART1 - FTDI USB
-     * UART3 - Radio        */
+
+    /* UART3 - Radio        */
 
     if(!UART3_ReceiveBufferIsEmpty())       //New data on UART3 (Radio)
     {
-        if(!UART1_TransmitBufferIsFull())   //There is free space in U1 TX buffer
+        uint8_t rxByte = UART3_Read();      //Read byte from remote radio
+        int desiredPacket = 0;
+        desiredPacket = CheckPacketLoop(rxByte); //check  if this data corresponds to the packet that we want
+        
+        if(desiredPacket)                   //packet that we are looking for
         {
-            UART1_Write(UART3_Read());      //Read byte from U3 and send to U1
+            InjectTryInject();              //create and inject our packet
         }
+        
     }
 }
 

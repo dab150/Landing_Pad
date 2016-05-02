@@ -39,6 +39,5 @@ int main(void)
     while(1)
     {
         RelayLoop();
-        InjectTryInject();
     }
 }
