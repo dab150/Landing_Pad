@@ -33,18 +33,11 @@ static inject_private_t CheckPacket;
 
 bool PACKET_DETECTED = false;
 
-
-/******************************************************************************/
-/* Public Variables                                                           */
-/******************************************************************************/
-
-
-
 /******************************************************************************/
 /* Local Functions                                                            */
 /******************************************************************************/
 
-void CheckRCLoopInit()
+void CheckPacketLoopInit()
 {
     //Init state
     CheckPacket.state = 0;
@@ -58,8 +51,8 @@ int CheckPacketLoop(unsigned char rx)
 {
     if(CheckPacket.state > MACHINE_NAME_STATE_MAX)
     {
-        CheckRCLoopInit();
-        return;
+        CheckPacketLoopInit();
+        return 0;
     }
 
     //Analyze received byte
@@ -98,7 +91,7 @@ int CheckPacketLoop(unsigned char rx)
         case MACHINE_NAME_STATE_MAX:
         default:
             //Error, unknown state
-            CheckRCLoopInit();
+            CheckPacketLoopInit();
             break;
     }
     return 0; //default
