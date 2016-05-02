@@ -15,7 +15,6 @@
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/uart1.h"
 #include "mcc_generated_files/uart3.h"
-#include "mcc_generated_files/uart2.h"
 #include "inject.h"
 
 /******************************************************************************/
@@ -23,8 +22,6 @@
 /******************************************************************************/
 
 relay_data_t relayData;
-
-
 
 /******************************************************************************/
 /* Functions                                                                  */
@@ -37,7 +34,6 @@ void RelayInit()
 {
     //Init state
     relayData.state = 0;
-
 }
 
 /**
@@ -45,50 +41,22 @@ void RelayInit()
  */
 void RelayLoop()
 {
-    bool usb = relayUSBConneted();
-
-    if(relayData.state > RELAY_STATE_MAX)
+    if(relayData.state > RELAY_STATE_ERROR)
     {
         RelayInit();
         return;
     }
-
+    
     switch (relayData.state)
     {
         case RELAY_STATE_INIT:
-            if(usb)
-            {
-                relayResetInjector();
-                relayData.state = RELAY_STATE_USB;
-            }
-            else
-            {
-                relayResetInjector();
-                relayData.state = RELAY_STATE_BLUETOOTH;
-            }
+                relayData.state = RELAY_STATE_RUNNING;
             break;
 
-        case RELAY_STATE_USB:
+        case RELAY_STATE_RUNNING:
             relayFromRadio();
-            relayFromUSB();
-            if(!usb)
-            {
-                relayResetInjector();
-                relayData.state = RELAY_STATE_BLUETOOTH;
-            }
-            break;
-
-        case RELAY_STATE_BLUETOOTH:
-            relayFromRadio();
-            relayFromBluetooth();
-            if(usb)
-            {
-                relayResetInjector();
-                relayData.state = RELAY_STATE_USB;
-            }
-            break;
-
-        case RELAY_STATE_MAX:
+            
+        case RELAY_STATE_ERROR:
         default:
             //Error, unknown state
             RelayInit();
@@ -96,88 +64,20 @@ void RelayLoop()
     }
 }
 
-
 /**
- * Does board connected to an USB port?
- * @return true if connected, false if not
- */
-bool relayUSBConneted()
-{
-    return !(USB_NOT_DETECTED_GetValue());
-}
-
-
-/**
- * Relays data from Radio to USB/Bluetooth
+ * Relays data from Radio to USB
  */
 void relayFromRadio()
 {
     /* UART1 - FTDI USB
-     * UART2 - Bluetooth
      * UART3 - Radio        */
 
     if(!UART3_ReceiveBufferIsEmpty())       //New data on UART3 (Radio)
     {
-        if(relayUSBConneted())
+        if(!UART1_TransmitBufferIsFull())   //There is free space in U1 TX buffer
         {
-            if(!UART1_TransmitBufferIsFull())   //There is free space in U1 tx buffer
-            {
-                UART1_Write(UART3_Read());      //Read byte from U3 and send to U1
-            }
-        }
-        else
-        {
-            if(!UART2_TransmitBufferIsFull())   //There is free space in U2 tx buffer
-            {
-                UART2_Write(UART3_Read());      //Read byte from U3 and send to U2
-            }
+            UART1_Write(UART3_Read());      //Read byte from U3 and send to U1
         }
     }
 }
-
-
-/**
- * Relays data from USB to Radio
- */
-void relayFromUSB()
-{
-    /* UART1 - FTDI USB
-     * UART2 - Bluetooth
-     * UART3 - Radio        */
-    
-    if(!UART1_ReceiveBufferIsEmpty())       //New data on UART1
-        InjectLoop(UART1_Read());           //Reads data from UART1 and sends to injector
-    
-    
-    //Lets see if there is some data available to send to radio
-    if(!CircularBufferIsEmpty(&(inject.outBuff)))
-        UART3_Write(CircularBufferDeque(&(inject.outBuff)));
-}
-
-
-/**
- * Relays data from Bluetooth to Radio
- */
-void relayFromBluetooth()
-{
-    /* UART1 - FTDI USB
-     * UART2 - Bluetooth
-     * UART3 - Radio        */
-
-    if(!UART2_ReceiveBufferIsEmpty())       //New data on UART2
-        InjectLoop(UART2_Read());           //Reads data from UART2 and sends to injector
-
-
-    //Lets see if there is some data available to send to radio
-    if(!CircularBufferIsEmpty(&(inject.outBuff)))
-        UART3_Write(CircularBufferDeque(&(inject.outBuff)));
-}
-
-
-void relayResetInjector()
-{
-    //This routine looks to not be necesary.
-    //Remove in next review
-}
-
 

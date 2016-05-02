@@ -24,8 +24,6 @@
         <itemPath>utests/seatest.h</itemPath>
         <itemPath>utests/unit.h</itemPath>
       </logicalFolder>
-      <itemPath>barometer.h</itemPath>
-      <itemPath>debug.h</itemPath>
       <itemPath>power.h</itemPath>
       <itemPath>relay.h</itemPath>
       <itemPath>inject.h</itemPath>
@@ -62,8 +60,6 @@
         <itemPath>utests/unit.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>barometer.c</itemPath>
-      <itemPath>debug.c</itemPath>
       <itemPath>traps.c</itemPath>
       <itemPath>relay.c</itemPath>
       <itemPath>inject.c</itemPath>
@@ -79,6 +75,7 @@
       <itemPath>deploy/build_number.txt</itemPath>
       <itemPath>deploy/user_name.txt</itemPath>
       <itemPath>deploy/prebuild.cmd</itemPath>
+      <itemPath>C:/Users/cironid12/Documents/Sourcetree/bt-causeway/MyConfig.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

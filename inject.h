@@ -1,19 +1,3 @@
-/******************************************************************************
- *
- *                             PIC16 LIBRARY
- *
- * File: StateMachine.c/h
- * Version: 1.02
- * Author: ruslan
- *
- * Change list:
- * ------------------------------------------------------
- *  - v1.00 - Original version
- *  - v1.01 - Variables are inside a struct
-              States are defined as enum
- *  - v1.02 - More states added
- ******************************************************************************/
-
 #ifndef INJECT_H
 #define	INJECT_H
 
@@ -22,11 +6,12 @@
 #define INJECT_PERIOD                   (60 * 2) //seconds
 
 #define RADIO_OUTPUT_BUFFER             256
-#define PARAM_UPDATE_MSG_LEN            23
-#define PARAM_UPDATE_FULL_LEN           (PARAM_UPDATE_MSG_LEN + 6 + 2)
 
-#define PRESS_SYSTEM_ID                 0xE3
-#define PRESS_COMP_ID                   191
+#define WP_CLEAR_MSG_LEN                4
+#define WP_CLEAR_FULL_LEN               (WP_CLEAR_MSG_LEN + 6 + 2)
+
+#define WP_CLEAR_SYSTEM_ID              0x01
+#define WP_CLEAR_COMP_ID                191
 
 /******************************************************************************/
 /* TypeDefs                                                                   */
@@ -41,22 +26,23 @@ typedef enum
 }inject_states_t;
 
 
+//the following union is based off of the MAVLink Packet Structure
 typedef union
 {
-    uint8_t buf[PARAM_UPDATE_FULL_LEN];
+    uint8_t buf[WP_CLEAR_FULL_LEN];
     struct
     {
-        uint8_t     start;              //0 - 1
-        uint8_t     len;                //1 - 2
-        uint8_t     count;              //2 - 3
-        uint8_t     sys_id;             //3 - 4
-        uint8_t     comp_id;            //4 - 5
-        uint8_t     msgType;            //5 - 6
-                                        //6 - 29
-        uint8_t     data[PARAM_UPDATE_MSG_LEN];
-        uint8_t     checksum[2];        //29- 31
+        uint8_t     start;            
+        uint8_t     len;                
+        uint8_t     count;             
+        uint8_t     sys_id;            
+        uint8_t     comp_id;           
+        uint8_t     msgType;            
+                                        
+        uint8_t     data[WP_CLEAR_MSG_LEN];
+        uint8_t     checksum[2]; 
     };
-}pressure_packet_t;
+}packet_t;
 
 typedef struct
 {    
@@ -71,8 +57,8 @@ typedef struct
     inject_states_t state;
     uint8_t bufArray[RADIO_OUTPUT_BUFFER];  //Array for a circular buffer
     uint16_t fullLen;       //How long is the actual packet
-    uint16_t cont;          //How many bytes of the actual buffer I already recieved
-    pressure_packet_t press;//packet for pressure value
+    uint16_t cont;          //How many bytes of the actual buffer I already received
+    packet_t packet;        //packet to send
     
 }inject_private_t;
 

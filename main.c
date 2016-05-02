@@ -1,12 +1,13 @@
 /*
  * File:   main.c
- * Author: ruslanOffice
+ * Author: Daniel Barber-Cironi
+ *         Jake Kruse
+ *         Tim Markley
+ *         Jared Ford
  *
- * Created on January 13, 2015, 3:53 PM
  */
 
 /*
- * UART1 - FTDI USB
  * UART3 - Radio
  * 
  */    
@@ -15,9 +16,7 @@
 #include <stdio.h>
 #include <xc.h>
 #include "mcc_generated_files/mcc.h"
-#include "barometer.h"
 #include "timers.h"
-#include "debug.h"
 #include "power.h"
 #include "relay.h"
 #include "inject.h"

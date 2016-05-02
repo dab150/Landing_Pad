@@ -14,8 +14,6 @@
 #include "string.h"
 #include "inject.h"
 #include "mcc_generated_files/uart1.h"
-#include "barometer.h"
-
 
 #define X25_INIT_CRC        0xffff
 #define X25_VALIDATE_CRC    0xf0b8
@@ -32,10 +30,8 @@ static inject_private_t this;
  * Sample pressure packet used for testing. We should take this array as
  * base and edit only the required fields
  */
-static const uint8_t __PRESSURE_SAMPLE[PARAM_UPDATE_FULL_LEN] =
-    {0xfe, 0x17, 0xfd, 0xff, 0xbe, 0x17, 0x00, 0x50, 0xc3, 0x47, 0x01, 0x01,
-     0x47, 0x4e, 0x44, 0x5f, 0x41, 0x42, 0x53, 0x5f, 0x50, 0x52, 0x45, 0x53,
-     0x53, 0x00, 0x00, 0x00, 0x09, 0x44, 0xac };
+static const uint8_t __WP_CLEAR_SAMPLE [WP_CLEAR_FULL_LEN] =
+    {0xfe, 0x04, 0x78, 0xff, 0xbe, 0x2d, 0x04, 0x00, 0x01, 0x01, 0xa8, 0x4e };
 
 static const uint8_t MAVLINK_MESSAGE_CRCS[] =
     {50, 124, 137, 0, 237, 217, 104, 119, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -111,16 +107,15 @@ void InjectInit()
     inject.timer = INJECT_PERIOD;
     CircularBufferInit(&(inject.outBuff), this.bufArray, RADIO_OUTPUT_BUFFER);
 
-    //Init Presure injection buffer
-    memcpy(this.press.buf, __PRESSURE_SAMPLE, PARAM_UPDATE_FULL_LEN);
-    this.press.count = 0;
-    this.press.sys_id = PRESS_SYSTEM_ID;
-    this.press.comp_id = PRESS_COMP_ID;
+    //Init injection buffer
+    memcpy(this.packet.buf, __WP_CLEAR_SAMPLE, WP_CLEAR_FULL_LEN);
+    this.packet.count = 0;
+    this.packet.sys_id = WP_CLEAR_SYSTEM_ID;
+    this.packet.comp_id = WP_CLEAR_COMP_ID;
 }
 
 /**
- * Analyze a stream byte by byte to detect packets and try to inject custom 
- * packets into the stream
+ * Analyze a stream byte by byte to detect packets and try to send custom packets in response
  * @param rx - next byte of the stream
  */
 void InjectLoop(uint8_t rx)
@@ -140,26 +135,24 @@ void InjectLoop(uint8_t rx)
     //Analyze received byte
     switch (this.state)
     {
-        case INJECT_STATE_MSG_END:
-            if(rx == 0xFE)
+        case INJECT_STATE_MSG_END:              //current state is the end of previous message, meaning we expect to see beginning of next message
+            if(rx == 0xFE)                      //0xFE is the universal start byte
             {
                 //First byte of the packet detected
-                this.state = INJECT_STATE_WAIT_LEN;
+                this.state = INJECT_STATE_WAIT_LEN;     //we switch states to analyze the length byte
             }
             break;
 
         case INJECT_STATE_WAIT_LEN:
-            //Len byte recieved
-            this.cont = 2;                    //Already has 2 bytes
-            this.fullLen = rx + 6 + 2 + 8;    //Calc the packet len
+            this.cont = 2;                    //Already has 2 bytes (start byte and length byte)
+            this.fullLen = rx + 6 + 2 + 8;    //Calculate the total packet length based on MAVLink structure
             this.state = INJECT_STATE_WAIT_END;
             break;
 
         case INJECT_STATE_WAIT_END:
             if(++this.cont >= this.fullLen)
             {
-                //Full packet recieved
-                this.state = INJECT_STATE_MSG_END;
+                this.state = INJECT_STATE_MSG_END;  //Full packet received
             }
             break;
 
@@ -176,53 +169,32 @@ void InjectLoop(uint8_t rx)
  * prepare the message and inject it
  */
 void InjectTryInject()
-{
+{   
+    uint8_t i;
+    uint16_t cheksum;
 
-    //I can't inject here?
-    if(this.state != INJECT_STATE_MSG_END)
-        return;
+    //Restart timer
+    inject.timer = INJECT_PERIOD;
 
-    //It isn't time to inject
-    if(inject.timer)
-        return;
+    //Get data
+    //This specific message does not have actual data in the payload. It is all zeros.
+    uint8_t data = 0;
+    //
 
-    //Is there enough space to inject?
-    if(CircularBufferFreeSpace(&(inject.outBuff)) > (2*PARAM_UPDATE_FULL_LEN))
-    {
-        uint8_t i;
-        uint16_t cheksum;
-        float pres = 10.0f;
+    //Update values
+    memcpy(this.packet.data, &data , sizeof(float));
+    this.packet.count++;
 
-        //Restart timer
-        inject.timer = INJECT_PERIOD;
+    //checksum
+    cheksum = crc_calculate(this.packet.buf, WP_CLEAR_MSG_LEN+6);
+    cheksum = crc_accumulate(
+            MAVLINK_MESSAGE_CRCS[this.packet.msgType],
+            cheksum);
 
-        //Get pressure
-        Bar_Calculate();
-        pres = (float)bar.pres;
+    memcpy(this.packet.checksum, &cheksum, sizeof(cheksum));
 
-        //Update values
-        memcpy(this.press.data, &pres, sizeof(float));
-        this.press.count++;
-
-        //checksum
-        cheksum = crc_calculate(this.press.buf, PARAM_UPDATE_MSG_LEN+6);
-        cheksum = crc_accumulate(
-                MAVLINK_MESSAGE_CRCS[this.press.msgType],
-                cheksum);
-
-        memcpy(this.press.checksum, &cheksum, sizeof(cheksum));
-
-        //Inject
-        for(i=0; i<PARAM_UPDATE_FULL_LEN; i++)
-            CircularBufferEnque(&(inject.outBuff), this.press.buf[i]);
-
-
-        {
-            char buff[50];
-            static uint16_t cont = 0;
-            sprintf(buff, "\n\rInjected = %d     ", cont++);
-            UART1_WriteBuffer((uint8_t*)buff, strlen(buff));
-        }
-    }
+    //Inject
+    for(i=0; i<WP_CLEAR_FULL_LEN; i++)
+        CircularBufferEnque(&(inject.outBuff), this.packet.buf[i]);
 }
 

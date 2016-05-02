@@ -13,8 +13,6 @@
 #include "mcc_generated_files/pin_manager.h"
 
 
-
-
 /******************************************************************************/
 /* Variables                                                                  */
 /******************************************************************************/
@@ -22,16 +20,12 @@
 uint8_t __delay_ms_timer;
 
 
-
-
-
-
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
 
 /**
- * Delays a given ammount of miliseconds. It's a bloking function
+ * Delays a given ammount of miliseconds.
  * @param delay - ms to delay. Max allowed value: 0xFF
  */
 void delay_ms(uint8_t delay) 
@@ -42,7 +36,7 @@ void delay_ms(uint8_t delay)
 
 
 /**
- * Delays a given ammount of microseconds. It's a bloking function
+ * Delays a given ammount of microseconds.
  * @param delay - uS to delay. Max allowed value: 0x3FFF (16383)
  */
 void delay_us(uint16_t delay)

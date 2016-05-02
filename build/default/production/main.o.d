@@ -12,15 +12,10 @@ mcc_generated_files/spi1.h  \
 mcc_generated_files/tmr2.h  \
  mcc_generated_files/uart4.h  \
 mcc_generated_files/i2c2.h  \
-barometer.h  \
- mcc_generated_files/pin_manager.h  \
 timers.h  \
-debug.h  \
-compass.h  \
- mcc_generated_files/i2c2.h  \
 power.h  \
-gps.h  \
+ mcc_generated_files/pin_manager.h  \
 relay.h  \
 inject.h  \
- CircularBuffer.h  \
-utests/unit.h 
+CircularBuffer.h  \
+ utests/unit.h 
